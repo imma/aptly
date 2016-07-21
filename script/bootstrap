@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+function bootstrap {
+  local shome="$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"
+  source "$shome/script/profile"
+
+  local url_aptly_Darwin="http://dl.bintray.com/smira/aptly/aptly_${APTLY_VERSION}_darwin_amd64.zip"
+  local url_aptly_Linux="http://dl.bintray.com/smira/aptly/aptly_${APTLY_VERSION}_linux_amd64.tar.gz"
+
+  local url_aptly="url_aptly_$(uname -s)"
+  local fnm_aptly="$(basename "${!url_aptly}")"
+  cache curl "$fnm_aptly" "${!url_aptly}"
+  
+  mkdir -p "$shome/vendor"
+  cd "$shome/vendor"
+  case "$fnm_aptly" in
+    *.zip)
+      unzip -o "${BASEBOX_CACHE}/curl/$fnm_aptly"
+      ;;
+    *.tar.gz)
+      tar xvfz "${BASEBOX_CACHE}/curl/$fnm_aptly"
+      ;;
+  esac
+}
+
+bootstrap

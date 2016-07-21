@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+function bootstrap {
+  local shome="$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"
+  source "$shome/script/profile"
+
+  (set +f; cd "$shome/bin"; ln -nfs ../vendor/aptly_${APTLY_VERSION}_*_amd64/aptly .)
+}
+
+bootstrap
