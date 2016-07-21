@@ -21,6 +21,8 @@ function bootstrap {
       tar xvfz "${BASEBOX_CACHE}/curl/$fnm_aptly"
       ;;
   esac
+
+  "$shome/script/update"
 }
 
 bootstrap
