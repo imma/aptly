@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function bootstrap {
-  local shome="$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"
+  local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
   local url_aptly_Darwin="http://dl.bintray.com/smira/aptly/aptly_${APTLY_VERSION}_darwin_amd64.zip"
