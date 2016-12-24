@@ -4,7 +4,7 @@ function main {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
-  if [[ ! -x "$(type -P aptly)" ]]; then
+  if [[ "$($shome/script/version | jq -r '.aptly')" != "$APTLY_VERSION" ]]; then
     return 1
   fi
 
